@@ -19,7 +19,6 @@ namespace RabbitMQ.TradeGateway
         {
             _connectionWrapper = connectionWrapper;
             Author = iniInitializer.Author;
-            while (!iniInitializer.IsInitialized);
         }
 
         public void Inform(TradeInformation trade)
