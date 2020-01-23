@@ -3,22 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Channels;
 using System.Threading.Tasks;
-using Application.Interfaces.MessageQueue;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RabbitMQGateway;
+using RabbitMQ.TradeGateway;
 
 namespace TradingPlatform.Tasks
 {
-
-
-    public class TestMessage
-    {
-        public string Property { get; set; } = "Hello my name is";
-
-    }
-
 
     public class TradeMonitorTask : BackgroundService
     {
@@ -33,20 +25,7 @@ namespace TradingPlatform.Tasks
         {
             using (var scope = Services.CreateScope())
             {
-
-                //Order here matters.
-                var externalPublisher = scope.ServiceProvider.GetRequiredService<IPublish>();
-                var subscriptionHandler = scope.ServiceProvider.GetRequiredService<ISubscribable>();
-
-                var message = new MQMessage()
-                {
-                    Category = "fruit",
-                    ItemName = "banana",
-                    Request = "sell",
-                    Body = new TestMessage(),
-                    ExchangeName = ExchangeInfo.Sell
-                };
-                externalPublisher.Publish(message);
+                var externalPublisher = scope.ServiceProvider.GetRequiredService<Publisher>();
             }
         }
     }

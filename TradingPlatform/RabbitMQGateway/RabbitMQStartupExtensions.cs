@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Application.Interfaces.MessageQueue;
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Framing.Impl;
 
-namespace RabbitMQGateway
+namespace RabbitMQ.TradeGateway
 {
     public class RabbitMQSettings
     {
-        public List<string> Exchanges { get; set; }
-
         public string Username { get; set; } = ConnectionFactory.DefaultUser;
         public string Password { get; set; } = ConnectionFactory.DefaultPass;
         public string VirtualHost { get; set; } = ConnectionFactory.DefaultVHost;
@@ -21,7 +14,7 @@ namespace RabbitMQGateway
 
     public static class RabbitMqStartupExtensions
     {
-        public static void AddRabbitMqConnection(this IServiceCollection services, Action<RabbitMQSettings> setupAction)
+        public static void AddRabbitMqConnectionWrapper(this IServiceCollection services, Action<RabbitMQSettings> setupAction)
         {
             var settings = new RabbitMQSettings();
             setupAction(settings);
@@ -35,7 +28,7 @@ namespace RabbitMQGateway
 
             services.AddSingleton(settings);
             services.AddSingleton<ConnectionFactory>(factory);
-            services.AddScoped<RabbitMQConnection>();
+            services.AddScoped<ConnectionWrapper>();
         }
     }
 }

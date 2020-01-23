@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Interfaces.MessageQueue;
+using Application.Interfaces.Trade;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
-using RabbitMQGateway;
+using RabbitMQ.TradeGateway;
 using TradingPlatform.Tasks;
 
 namespace TradingPlatform
@@ -31,7 +31,7 @@ namespace TradingPlatform
         {
 
 
-            services.AddRabbitMqConnection((settings) =>
+            services.AddRabbitMqConnectionWrapper((settings) =>
             {
                 //TODO: needs to come from config
                 settings.Username = ConnectionFactory.DefaultUser;
@@ -40,7 +40,8 @@ namespace TradingPlatform
                 settings.VirtualHost = ConnectionFactory.DefaultVHost;
                 settings.Exchanges = new List<string>(new string[]{ExchangeInfo.Sell,ExchangeInfo.Buy, ExchangeInfo.Info});
             });
-            services.AddScoped<IPublish, RabbitMQPublisher>();
+            services.AddScoped<ITradeInform, Publisher>();
+            services.AddScoped<ITrade, Publisher>();
             services.AddHostedService<TradeMonitorTask>();
             services.AddControllers();
             

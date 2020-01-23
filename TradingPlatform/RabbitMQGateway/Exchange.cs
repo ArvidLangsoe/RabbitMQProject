@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Application.Interfaces.MessageQueue
+﻿namespace RabbitMQ.TradeGateway
 {
-    public static class ExchangeInfo
+    public static class Exchange
     {
         public static string Sell ="Trade.Sell";
         public static string Buy = "Trade.Buy";

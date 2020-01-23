@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RabbitMQGateway\RabbitMQGateway.csproj" />
+    <ProjectReference Include="..\RabbitMQGateway\RabbitMQ.TradeGateway.csproj" />
   </ItemGroup>
 
 

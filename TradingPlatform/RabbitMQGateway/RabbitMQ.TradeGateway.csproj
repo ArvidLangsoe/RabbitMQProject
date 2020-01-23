@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\RabbitMQ.Client\RabbitMQ.Client.Extensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
