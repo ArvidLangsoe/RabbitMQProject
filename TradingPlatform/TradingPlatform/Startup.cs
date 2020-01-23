@@ -38,7 +38,7 @@ namespace TradingPlatform
                 settings.Password = ConnectionFactory.DefaultPass;
                 settings.HostName = "localhost";
                 settings.VirtualHost = ConnectionFactory.DefaultVHost;
-                settings.Exchanges = new List<string>(new string[]{"Trade.Sell"});
+                settings.Exchanges = new List<string>(new string[]{ExchangeInfo.Sell,ExchangeInfo.Buy, ExchangeInfo.Info});
             });
             services.AddScoped<IPublish, RabbitMQPublisher>();
             services.AddHostedService<TradeMonitorTask>();

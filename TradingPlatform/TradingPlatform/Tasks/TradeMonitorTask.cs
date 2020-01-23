@@ -33,8 +33,10 @@ namespace TradingPlatform.Tasks
         {
             using (var scope = Services.CreateScope())
             {
-                var externalPublisher = scope.ServiceProvider.GetRequiredService<IPublish>();
 
+                //Order here matters.
+                var externalPublisher = scope.ServiceProvider.GetRequiredService<IPublish>();
+                var subscriptionHandler = scope.ServiceProvider.GetRequiredService<ISubscribable>();
 
                 var message = new MQMessage()
                 {

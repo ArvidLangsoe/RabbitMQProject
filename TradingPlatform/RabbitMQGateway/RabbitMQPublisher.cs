@@ -23,8 +23,7 @@ namespace RabbitMQGateway
         public void Publish(MQMessage message)
         {
             string messageSerialised = JsonConvert.SerializeObject(message.Body);
-            byte[] messageBodyBytes = System.Text.Encoding.UTF8.GetBytes(messageSerialised);
-
+            byte[] messageBodyBytes = Encoding.UTF8.GetBytes(messageSerialised);
             _connection.Channel.BasicPublish(message.ExchangeName,$"{message.Category}.{message.ItemName}.{message.Request}", false,null , messageBodyBytes);
         }
 
