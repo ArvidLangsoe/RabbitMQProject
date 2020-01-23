@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace RabbitMQ.TradeGateway
+namespace RabbitMQ.TradeGateway.Util
 {
     public class ConnectionWrapper
     {

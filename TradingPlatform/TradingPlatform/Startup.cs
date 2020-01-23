@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using RabbitMQ.TradeGateway;
+using RabbitMQ.TradeGateway.Setup;
+using RabbitMQ.TradeGateway.Util;
 using TradingPlatform.Tasks;
 
 namespace TradingPlatform
@@ -38,8 +40,8 @@ namespace TradingPlatform
                 settings.Password = ConnectionFactory.DefaultPass;
                 settings.HostName = "localhost";
                 settings.VirtualHost = ConnectionFactory.DefaultVHost;
-                settings.Exchanges = new List<string>(new string[]{ExchangeInfo.Sell,ExchangeInfo.Buy, ExchangeInfo.Info});
             });
+            services.AddScoped<RabbitMQInitializer, DeclareInitializer>();
             services.AddScoped<ITradeInform, Publisher>();
             services.AddScoped<ITrade, Publisher>();
             services.AddHostedService<TradeMonitorTask>();

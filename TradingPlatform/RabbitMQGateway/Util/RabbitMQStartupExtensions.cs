@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 
-namespace RabbitMQ.TradeGateway
+namespace RabbitMQ.TradeGateway.Util
 {
     public class RabbitMQSettings
     {

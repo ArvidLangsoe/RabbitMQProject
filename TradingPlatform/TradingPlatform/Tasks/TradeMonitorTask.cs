@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using Application.Interfaces.Trade;
+using Domain;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.TradeGateway;
@@ -25,7 +27,14 @@ namespace TradingPlatform.Tasks
         {
             using (var scope = Services.CreateScope())
             {
-                var externalPublisher = scope.ServiceProvider.GetRequiredService<Publisher>();
+                var externalPublisher = scope.ServiceProvider.GetRequiredService<ITrade>();
+
+                externalPublisher.Sell(new SellOffer()
+                {
+                    Category = "fruit",
+                    Id = Guid.NewGuid(),
+                    ItemName = "banana"
+                });
             }
         }
     }
