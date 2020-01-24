@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Domain
 {
-    public class BuyRequest : TradeRequest
+    public class SellRequest : TradeRequest
     {
+        public double MinPrice { get; set; }
     }
 }

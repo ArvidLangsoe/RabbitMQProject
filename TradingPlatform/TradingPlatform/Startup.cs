@@ -46,7 +46,6 @@ namespace TradingPlatform
                 Author = "Server"
             });
             services.AddSingleton<TradeExchangeCreator>();
-            services.AddScoped<ITradeInform, Publisher>();
             services.AddSingleton<QueueManager>();
             services.AddScoped<ITrade, Publisher>();
             services.AddHostedService<TradeMonitorTask>();
