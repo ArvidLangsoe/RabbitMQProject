@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using RabbitMQ.TradeGateway.Setup;
 using RabbitMQ.TradeGateway.Util;
@@ -18,7 +19,12 @@ namespace RabbitMQ.TradeGateway
         {
             Author = author;
             ExchangeName = exchangeName;
-            RoutingKeys = routingKeys ?? new List<string>(new string[]{"#"});
+            if (routingKeys == null || !routingKeys.Any())
+            {
+                routingKeys = new List<string>(new string[] {"*.*.*"});
+            }
+
+            RoutingKeys = routingKeys;
         }
 
     }

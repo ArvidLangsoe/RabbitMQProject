@@ -14,7 +14,7 @@ using RabbitMQ.TradeGateway;
 namespace TradingPlatform.Tasks
 {
 
-    public class TradeMonitorTask : BackgroundService
+    public class TradeMonitorTask : BackgroundService, ISubscriber
     {
         public TradeMonitorTask(IServiceProvider services)
         {
@@ -23,19 +23,43 @@ namespace TradingPlatform.Tasks
 
         public IServiceProvider Services { get; }
 
-        protected async override Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            using (var scope = Services.CreateScope())
-            {
-                var externalPublisher = scope.ServiceProvider.GetRequiredService<ITrade>();
+            using var scope = Services.CreateScope();
+            var externalPublisher = scope.ServiceProvider.GetRequiredService<ITrade>();
+            var queueManage = scope.ServiceProvider.GetRequiredService<QueueManager>();
 
+            var filters = new List<Filter> {new Filter() {Category = "fruit",}};
+            var messageFilter = new MessageFilter()
+            {
+                Filters =  filters
+            };
+
+            queueManage.Subscribe(Exchange.Sell, messageFilter, this);
+
+            while (true)
+            {
                 externalPublisher.Sell(new SellOffer()
                 {
                     Category = "fruit",
                     Id = Guid.NewGuid(),
                     ItemName = "banana"
                 });
+
+                externalPublisher.Sell(new SellOffer()
+                {
+                    Category = "tools",
+                    Id = Guid.NewGuid(),
+                    ItemName = "hammer"
+                });
+
+                await Task.Delay(TimeSpan.FromMilliseconds(1), stoppingToken);
             }
+        }
+
+        public void NewMessage(object trade)
+        {
+            var a = trade;
         }
     }
 }

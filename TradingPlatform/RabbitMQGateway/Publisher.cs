@@ -43,6 +43,7 @@ namespace RabbitMQ.TradeGateway
                 _channel = _connectionWrapper.NewChannel();
             }
             _channel.BasicPublish(exchange.Name(), trade, $"{trade.Category}.{trade.ItemName}.{author}");
+            
 
         }
 

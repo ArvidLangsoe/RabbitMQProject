@@ -8,7 +8,7 @@ namespace Application.Interfaces.Trade
     public interface ISubscriber
     {
 
-        void NewMessage(TradeBase trade);
+        void NewMessage(object trade);
 
     }
 }

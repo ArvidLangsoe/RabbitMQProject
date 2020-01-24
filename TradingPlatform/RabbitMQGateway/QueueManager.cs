@@ -30,12 +30,12 @@ namespace RabbitMQ.TradeGateway
 
             var routingKeys = messageFilter?.Filters.Select(x=> $"{x.Category??"*"}.{x.Item ?? "*"}.*").ToList();
 
+
             var queue = new Queue(_userSettings.Author,exchange.Name(),routingKeys);
             var queueConnection = new QueueConnection(new ConnectionWrapper(_connectionFactory),queue);
             _queueConnections.Add(queueConnection);
 
-
-
+            queueConnection.StartListening(subscriber);
         }
     }
 }
