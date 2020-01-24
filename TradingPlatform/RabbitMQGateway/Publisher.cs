@@ -15,7 +15,7 @@ namespace RabbitMQ.TradeGateway
 
         private IModel _channel;
 
-        public Publisher(ConnectionWrapper connectionWrapper,RabbitMQUserSettings userSettings, ExchangeCreator exchangeCreator)
+        public Publisher(ConnectionWrapper connectionWrapper,RabbitMQUserSettings userSettings, TradeExchangeCreator tradeExchangeCreator)
         {
             _connectionWrapper = connectionWrapper;
             Author = userSettings.Author;
@@ -36,13 +36,13 @@ namespace RabbitMQ.TradeGateway
             Publish(offer, Exchange.Sell, Author);
         }
 
-        private void Publish(TradeBase trade,string exchange,string author)
+        private void Publish(TradeBase trade,Exchange exchange,string author)
         {
             if (_channel == null || _channel.IsClosed)
             {
                 _channel = _connectionWrapper.NewChannel();
             }
-            _channel.BasicPublish(exchange, trade, $"{trade.Category}.{trade.ItemName}.{author}");
+            _channel.BasicPublish(exchange.Name(), trade, $"{trade.Category}.{trade.ItemName}.{author}");
 
         }
 

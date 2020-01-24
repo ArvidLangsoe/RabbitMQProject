@@ -18,7 +18,7 @@ namespace RabbitMQ.TradeGateway
         {
             Author = author;
             ExchangeName = exchangeName;
-            RoutingKeys = routingKeys;
+            RoutingKeys = routingKeys ?? new List<string>(new string[]{"#"});
         }
 
     }

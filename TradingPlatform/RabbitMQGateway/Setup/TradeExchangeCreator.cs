@@ -6,20 +6,20 @@ using RabbitMQ.TradeGateway.Util;
 
 namespace RabbitMQ.TradeGateway.Setup
 {
-    public class ExchangeCreator
+    public class TradeExchangeCreator
     {
         private readonly ConnectionFactory _connectionFactory;
 
-        public ExchangeCreator(ConnectionFactory connectionFactory, bool declarePassive=false)
+        public TradeExchangeCreator(ConnectionFactory connectionFactory, bool declarePassive=false)
         {
             _connectionFactory = connectionFactory;
             if (declarePassive)
             {
-                DeclareExchangesPassive(Exchange.Sell, Exchange.Buy, Exchange.Info);
+                DeclareExchangesPassive(Exchange.Sell.Name(), Exchange.Buy.Name(), Exchange.Info.Name());
             }
             else
             {
-                DeclareExchanges(Exchange.Sell, Exchange.Buy, Exchange.Info);
+                DeclareExchanges(Exchange.Sell.Name(), Exchange.Buy.Name(), Exchange.Info.Name());
             }
 
         }
