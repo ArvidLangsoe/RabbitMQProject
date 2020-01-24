@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Application.Commands.Trade.Models;
 using MediatR;
 
-namespace Domain
+namespace Application.Commands.Trade.Buy
 {
 
     //Where to put these. Are they domain objects? Are they something else? They are definetly not application classes.

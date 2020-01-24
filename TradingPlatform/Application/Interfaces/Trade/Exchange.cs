@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RabbitMQ.TradeGateway
+namespace Application.Interfaces.Trade
 {
     public enum Exchange
     {

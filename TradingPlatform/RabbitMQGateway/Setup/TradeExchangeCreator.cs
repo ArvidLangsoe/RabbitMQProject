@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Application.Interfaces.Trade;
 using RabbitMQ.Client;
 using RabbitMQ.TradeGateway.Util;
 

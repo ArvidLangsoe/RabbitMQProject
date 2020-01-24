@@ -1,6 +1,8 @@
 ﻿using System;
+using Application.Commands.Trade.Buy;
+using Application.Commands.Trade.Models;
+using Application.Commands.Trade.Sell;
 using Application.Interfaces.Trade;
-using Domain;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Extensions;
 using RabbitMQ.TradeGateway.Setup;

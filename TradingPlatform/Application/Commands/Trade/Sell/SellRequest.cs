@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Application.Commands.Trade.Models;
 
-namespace Domain
+namespace Application.Commands.Trade.Sell
 {
     public class SellRequest : TradeRequest
     {

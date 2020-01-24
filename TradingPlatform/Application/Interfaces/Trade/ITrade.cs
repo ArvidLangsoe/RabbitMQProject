@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Commands.Trade.Buy;
+using Application.Commands.Trade.Sell;
 
 namespace Application.Interfaces.Trade
 {
