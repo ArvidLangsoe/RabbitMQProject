@@ -8,7 +8,7 @@ using RabbitMQ.TradeGateway.Util;
 
 namespace RabbitMQ.TradeGateway
 {
-    public class Publisher : ITradeInform, ITrade, IDisposable
+    public class Publisher :  ITrade, IDisposable
     {
         private readonly ConnectionWrapper _connectionWrapper;
         private string Author { get; }
@@ -21,19 +21,15 @@ namespace RabbitMQ.TradeGateway
             Author = userSettings.Author;
         }
 
-        public void Inform(TradeInformation trade)
+
+        public void Buy(BuyRequest request)
         {
-            Publish(trade,Exchange.Info,Author);
+            Publish(request, Exchange.Buy, Author);
         }
 
-        public void Buy(BuyOffer offer)
+        public void Sell(SellRequest request)
         {
-            Publish(offer, Exchange.Buy, Author);
-        }
-
-        public void Sell(SellOffer offer)
-        {
-            Publish(offer, Exchange.Sell, Author);
+            Publish(request, Exchange.Sell, Author);
         }
 
         private void Publish(TradeBase trade,Exchange exchange,string author)

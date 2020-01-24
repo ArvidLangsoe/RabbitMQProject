@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain
 {
-    public class TradeRequestBase : TradeBase
+    public class BuyRequest : TradeRequest
     {
     }
 }

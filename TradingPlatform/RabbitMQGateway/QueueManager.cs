@@ -18,6 +18,7 @@ namespace RabbitMQ.TradeGateway
         private readonly List<QueueConnection> _queueConnections;
 
         public QueueManager(ConnectionFactory connectionFactory, RabbitMQUserSettings userSettings, TradeExchangeCreator tradeExchangeCreator)
+
         {
             _connectionFactory = connectionFactory;
             _userSettings = userSettings;
@@ -26,8 +27,6 @@ namespace RabbitMQ.TradeGateway
 
         public void Subscribe(Exchange exchange, MessageFilter messageFilter, ISubscriber subscriber)
         {
-            //Todo: Setup routing keys.
-
             var routingKeys = messageFilter?.Filters.Select(x=> $"{x.Category??"*"}.{x.Item ?? "*"}.*").ToList();
 
 

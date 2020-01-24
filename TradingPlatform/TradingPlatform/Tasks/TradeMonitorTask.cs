@@ -39,14 +39,14 @@ namespace TradingPlatform.Tasks
 
             while (true)
             {
-                externalPublisher.Sell(new SellOffer()
+                externalPublisher.Sell(new SellRequest()
                 {
                     Category = "fruit",
                     Id = Guid.NewGuid(),
                     ItemName = "banana"
                 });
 
-                externalPublisher.Sell(new SellOffer()
+                externalPublisher.Sell(new SellRequest()
                 {
                     Category = "tools",
                     Id = Guid.NewGuid(),

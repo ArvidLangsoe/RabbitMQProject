@@ -5,7 +5,7 @@ namespace Application.Interfaces.Trade
     public interface ITrade
     {
 
-        void Buy(BuyOffer offer);
-        void Sell(SellOffer offer);
+        void Buy(BuyRequest request);
+        void Sell(SellRequest request);
     }
 }
