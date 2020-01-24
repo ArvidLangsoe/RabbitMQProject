@@ -4,7 +4,7 @@ using RabbitMQ.Client;
 
 namespace RabbitMQ.TradeGateway.Util
 {
-    public class RabbitMQSettings
+    public class RabbitMQConnectionSettings
     {
         public string Username { get; set; } = ConnectionFactory.DefaultUser;
         public string Password { get; set; } = ConnectionFactory.DefaultPass;
@@ -14,9 +14,9 @@ namespace RabbitMQ.TradeGateway.Util
 
     public static class RabbitMqStartupExtensions
     {
-        public static void AddRabbitMqConnectionWrapper(this IServiceCollection services, Action<RabbitMQSettings> setupAction)
+        public static void AddRabbitMqConnectionWrapper(this IServiceCollection services, Action<RabbitMQConnectionSettings> setupAction)
         {
-            var settings = new RabbitMQSettings();
+            var settings = new RabbitMQConnectionSettings();
             setupAction(settings);
             var factory = new ConnectionFactory
             {

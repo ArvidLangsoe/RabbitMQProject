@@ -41,7 +41,11 @@ namespace TradingPlatform
                 settings.HostName = "localhost";
                 settings.VirtualHost = ConnectionFactory.DefaultVHost;
             });
-            services.AddScoped<RabbitMQInitializer, DeclareInitializer>();
+            services.AddSingleton(new RabbitMQUserSettings()
+            {
+                Author = "Server"
+            });
+            services.AddSingleton<ExchangeCreator>();
             services.AddScoped<ITradeInform, Publisher>();
             services.AddScoped<ITrade, Publisher>();
             services.AddHostedService<TradeMonitorTask>();

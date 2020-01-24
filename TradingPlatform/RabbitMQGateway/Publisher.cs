@@ -8,17 +8,17 @@ using RabbitMQ.TradeGateway.Util;
 
 namespace RabbitMQ.TradeGateway
 {
-    public class Publisher :ITradeInform, ITrade, IDisposable
+    public class Publisher : ITradeInform, ITrade, IDisposable
     {
         private readonly ConnectionWrapper _connectionWrapper;
         private string Author { get; }
 
         private IModel _channel;
 
-        public Publisher(ConnectionWrapper connectionWrapper, RabbitMQInitializer iniInitializer)
+        public Publisher(ConnectionWrapper connectionWrapper,RabbitMQUserSettings userSettings, ExchangeCreator exchangeCreator)
         {
             _connectionWrapper = connectionWrapper;
-            Author = iniInitializer.Author;
+            Author = userSettings.Author;
         }
 
         public void Inform(TradeInformation trade)

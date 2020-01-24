@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RabbitMQ.TradeGateway.Setup
 {
-    public class InitSettings
+    public class RabbitMQUserSettings
     {
         public string Author { get; set; }
     }

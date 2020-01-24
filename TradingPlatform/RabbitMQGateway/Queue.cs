@@ -21,21 +21,5 @@ namespace RabbitMQ.TradeGateway
             RoutingKeys = routingKeys;
         }
 
-
-        public void Declare(ConnectionWrapper connection)
-        {
-            using (var channel = connection.NewChannel())
-            {
-                channel.QueueDeclare(Name, true, false, false, null);
-
-                foreach (var routingKey in RoutingKeys)
-                {
-                    channel.QueueBind(Name, ExchangeName, routingKey, null);
-                }
-            }
-
-        }
-
-
     }
 }

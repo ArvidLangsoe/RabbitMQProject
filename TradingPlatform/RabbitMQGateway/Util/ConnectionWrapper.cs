@@ -1,8 +1,9 @@
-﻿using RabbitMQ.Client;
+﻿using System;
+using RabbitMQ.Client;
 
 namespace RabbitMQ.TradeGateway.Util
 {
-    public class ConnectionWrapper
+    public class ConnectionWrapper : IDisposable
     {
         private readonly ConnectionFactory _connectionFactory;
         private IConnection _connection;
@@ -37,6 +38,11 @@ namespace RabbitMQ.TradeGateway.Util
             }
 
             Connect();
+        }
+
+        public void Dispose()
+        {
+            _connection?.Dispose();
         }
     }
 }
